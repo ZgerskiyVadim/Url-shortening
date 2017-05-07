@@ -1,0 +1,98 @@
+<h1>Url shortening</h1>
+
+<div ng-controller="userPageController as up">
+
+    <form ng-show="up.loginout" class="col-md-2">
+        <button class="btn btn-primary" ng-click="up.userLoginGoOut()">Log out</button>
+    </form>
+    <form ng-show="up.ShowAllcontacts" class="col-md-2">
+        <button class="btn btn-primary" ng-click="up.showcontacts()">Show All contacts</button>
+    </form>
+    <form ng-show="up.HideAllcontacts" class="col-md-2">
+        <button class="btn btn-primary" ng-click="up.hidecontacts()">Hide All contacts</button>
+    </form>
+    <form ng-show="up.Settings" class="col-md-2">
+        <button class="btn btn-primary" ng-click="up.showsett()">Edit</button>
+    </form>
+
+
+    <table class="table" ng-show="up.iminside">
+
+        <thead>
+        <tr>
+            <th>userName</th>
+            <th>Email</th>
+            <th>firstName</th>
+            <th>lastName</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-show="up.ShowEdit">
+            <form class="form-inline" name="settingsForm">
+                <td>
+                    <input type="text" name="username" ng-minlength="1" class="form-control" ng-model="up.editUser.username" required>
+                </td>
+                <td>
+                    <input type="email" name="email" ng-minlength="1" class="form-control" ng-model="up.editUser.email" required>
+                </td>
+                <td>
+                    <input type="text" name="firstName" ng-minlength="1" class="form-control" ng-model="up.editUser.firstName" required>
+                </td>
+                <td>
+                    <input type="text" name="lastName" ng-minlength="1" class="form-control" ng-model="up.editUser.lastName" required>
+                </td>
+
+                <td><button class="btn btn-info" ng-click="up.update(up.editUser._id, up.editUser)">Save changes</button>&nbsp;&nbsp;</td>
+            </form>
+        </tr>
+
+
+        <tr ng-show="up.ShowUsers" ng-repeat="contact in up.contactlist">
+            <td>{{contact.username}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.firstName}}</td>
+            <td>{{contact.lastName}}</td>
+            <td><button class="btn btn-danger" ng-click="up.remove(contact._id)">Remove</button></td>
+            <td><button class="btn btn-warning" ng-click="up.edit(contact._id)">Edit</button> </td>
+        </tr>
+        <tr ng-show="up.ShowSettings">
+            <td>{{up.userInTheHouse.username}}</td>
+            <td>{{up.userInTheHouse.email}}</td>
+            <td>{{up.userInTheHouse.firstName}}</td>
+            <td>{{up.userInTheHouse.lastName}}</td>
+            <td><button class="btn btn-danger" ng-click="up.remove(up.userInTheHouse._id)">Remove</button></td>
+            <td><button class="btn btn-warning" ng-click="up.edit(up.userInTheHouse._id)">Edit</button> </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form ng-show="up.showFormForCreateUrl" class="form-inline col-xs-8">
+
+        <div class="form-group col-sm-5">
+            <label>Create shortUrl</label>
+            <input class="form-control" ng-model="up.contact.link" placeholder="Enter url">
+            <button class="btn btn-primary" ng-click="up.createUrl(up.contact)">Enter</button>
+            <form ng-show="up.showFormShortUrl">
+                <table class="table">
+                    <tr>
+                        <thead>
+                        <th>Link</th>
+                        <th>shortLink</th>
+                        <th>count</th>
+                        </thead>
+                    </tr>
+                    <tbody>
+                    <tr ng-repeat="url in up.urllist">
+                        <td>{{url.link}}</td>
+                        <td>{{url.shortLink}}</td>
+                        <td>{{url.count}}</td>
+                        <td><button class="btn btn-danger" ng-click="up.removeUrl(url._id)">Remove</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </form>
+
+</div>

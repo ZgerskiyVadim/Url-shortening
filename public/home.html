@@ -1,0 +1,92 @@
+<h1>Url shortening</h1>
+
+<div ng-controller="mainController as vm">
+    <form ng-show="vm.loginstration" class="form-inline">
+        <button class="btn" ng-click="vm.login()">login</button>
+        <button class="btn" ng-click="vm.registration()">registration</button>
+    </form>
+
+    <form ng-show="vm.showRegistration" name="addUserForm" novalidate>
+        <div class="form-horizontal col-md-5">
+            <div ng-class="{ 'has-error' : addUserForm.username.$invalid && !addUserForm.username.$pristine }">
+                <label>userName</label>
+                <input name="username" class="form-control" ng-model="vm.contact.username" required>
+                <p ng-show="addUserForm.username.$error.required && !userForm.username.$pristine" class="help-block">Your userName is required.</p>
+            </div>
+            <div ng-class="{ 'has-error' : addUserForm.email.$invalid && !addUserForm.email.$pristine }">
+                <label>Email</label>
+                <input name="email" class="form-control" ng-model="vm.contact.email" type="email" required>
+                <p ng-show="addUserForm.email.$invalid && !addUserForm.email.$pristine" class="help-block">Enter a valid email.</p>
+            </div>
+            <div ng-class="{ 'has-error' : addUserForm.password.$invalid && !addUserForm.password.$pristine }">
+                <label>Password</label>
+                <input name="password" ng-minlength="6" class="form-control" ng-model="vm.contact.password" type="password" required>
+                <p ng-show="addUserForm.password.$error.minlength && !addUserForm.password.$pristine" class="help-block">Password is too short.</p>
+                <p ng-show="addUserForm.password.$error.required && !addUserForm.password.$pristine" class="help-block">Password is required</p>
+            </div>
+            <div ng-class="{ 'has-error' : addUserForm.firstName.$invalid && !addUserForm.firstName.$pristine }">
+                <label>firstName</label>
+                <input name="firstName" ng-minlength="3" class="form-control" ng-model="vm.contact.firstName" type="text" required>
+                <p ng-show="addUserForm.firstName.$error.minlength && !addUserForm.firstName.$pristine" class="help-block">First name is too short.</p>
+                <p ng-show="addUserForm.firstName.$error.required && !addUserForm.firstName.$pristine" class="help-block">First name is required.</p>
+            </div>
+            <div ng-class="{ 'has-error' : addUserForm.lastName.$invalid && !addUserForm.lastName.$pristine }">
+                <label>lastName</label>
+                <input name="lastName" ng-minlength="3" class="form-control" ng-model="vm.contact.lastName" type="text" required>
+                <p ng-show="addUserForm.lastName.$error.minlength && !addUserForm.lastName.$pristine" class="help-block">Last name is too short.</p>
+                <p ng-show="addUserForm.lastName.$error.required && !addUserForm.lastName.$pristine" class="help-block">Last name is required.</p>
+            </div>
+
+            <button ng-disabled="addUserForm.$invalid" class="btn btn-primary" ng-click="vm.addContact(vm.contact)">Add Contact</button>
+        </div>
+    </form>
+
+
+
+    <form ng-show="vm.showLoginIn" name="enterUser" novalidate>
+        <div class="form-horizontal col-md-5">
+            <div ng-class="{ 'has-error' : enterUser.username.$invalid && !enterUser.username.$pristine }">
+                <label>userName</label>
+                <input name="username" class="form-control" ng-model="vm.contact.username" required>
+            </div>
+            <div ng-class="{ 'has-error' : enterUser.password.$invalid && !enterUser.password.$pristine }">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" ng-model="vm.contact.password" required>
+            </div>
+            <button class="btn btn-primary" ng-disabled="enterUser.$invalid" ng-click="vm.enterLogin(vm.contact)">Enter</button>
+        </div>
+    </form>
+
+    <form class="col-md-8">
+        <div class="col-md-4">
+            <h4>Search:</h4> <input class="form-control" ng-model="filterUrl">
+        </div>
+    </form>
+
+    <table class="table urlCss" ng-show="vm.showAllUrls">
+        <thead>
+            <tr>
+                <th>Who create</th>
+                <th>Url</th>
+                <th>short Url</th>
+                <th>count</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-show="vm.Urls" ng-repeat="test in vm.listUrl  | filter:filterUrl">
+            <td>{{test.authorId.username}}</td>
+            <td>{{test.link}}</td>
+            <td ng-click="vm.goOnOurUrl(test.shortLink)">{{test.shortLink}}</td>
+            <td>{{test.count}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+
+
+
+

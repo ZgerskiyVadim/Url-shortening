@@ -1,0 +1,30 @@
+{
+  "name": "newtask",
+  "version": "1.0.0",
+  "description": "admin page and users page",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Vadim_Zgerskiy@bitbucket.org/Vadim_Zgerskiy/newtask.git"
+  },
+  "author": "Vadim Zgerskiy zgerskiy.vadim@mail.ru",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Vadim_Zgerskiy/newtask#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.4.20",
+    "randomstring": "^1.1.5",
+    "serve-favicon": "^2.3.2",
+    "winston": "^2.2.0"
+  },
+  "engines": {
+    "node": "4.5.0",
+    "npm": "3.9.2"
+  }
+}
